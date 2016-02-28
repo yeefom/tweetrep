@@ -15,6 +15,7 @@
   "homepage": "https://bitbucket.org/yeefom/tweetrep#readme",
   "dependencies": {
     "body-parser": "^1.15.0",
-    "express": "^4.13.4"
+    "express": "^4.13.4",
+    "morgan": "^1.7.0"
   }
 }
