@@ -8,7 +8,9 @@ app.use(body_parser.urlencoded({extended : true}));
 app.use(body_parser.json());
 app.use(express.static('client'));
 
-var server = app.listen(8080, function() {
+require('./controllers/routes.js')(app);
+
+app.listen(8080, function() {
   console.log('Express server listening on port 8080');
 });
 
