@@ -1,0 +1,20 @@
+{
+  "name": "Tweetrep",
+  "version": "1.0.0",
+  "description": "Twitter Reputation Analyzer",
+  "main": "client/index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://yeefom@bitbucket.org/yeefom/tweetrep.git"
+  },
+  "author": "Yifeng Wang",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/yeefom/tweetrep#readme",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4"
+  }
+}
