@@ -8,11 +8,10 @@ var getTweets = function (screenName) {
       if (error) {
         reject(error);
       } else {
-        var data = {tweets: tweets, responses: responses};
-        resolve(data);
+        resolve(tweets);
       }
     });
   });
 };
 
-module.exports = getTweets;
+module.exports.getTweets = getTweets;
