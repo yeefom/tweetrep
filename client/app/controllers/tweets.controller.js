@@ -19,11 +19,21 @@
 
       $scope.sort = '-createdAt';
 
-      $scope.sortBy = function () {
-        if ($scope.sort === '-createdAt') {
-          $scope.sort = '-retweetCount';
+      $scope.sortByDate = function () {
+        $scope.sort = '-createdAt';
+      };
+
+      $scope.sortByRetweet = function () {
+        $scope.sort = '-retweetCount';
+      };
+
+      $scope.show = 'tweet.media';
+
+      $scope.picOnly = function () {
+        if ($scope.show === 'tweet.createdAt') {
+          $scope.show = 'tweet.media';
         } else {
-          $scope.sort = '-createdAt';
+          $scope.show = 'tweet.createdAt';
         }
       };
     }
