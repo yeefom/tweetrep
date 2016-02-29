@@ -5,11 +5,12 @@
     Sort by: <button ng-click="sortByDate()">Most Recent</button> <button ng-click="sortByRetweet()">Most Retweeted</button>
   </div>
   <div>
-    Filter by: <button ng-click="picOnly()">Image</button>
+    Filter: <button ng-click="picOnly()">Image</button> <button ng-click="all()">All</button>
   </div>
   <div ng-repeat="tweet in tweets.data | orderBy:sort">
     <div>{{tweet.createdAtDisplay}}</div>
     <div>{{tweet.text}}</div>
+    <img ng-src="{{tweet.media}}" ng-if="tweet.media">
     <div>
       <span>Retweet: {{tweet.retweetCount}}</span>
       <span>Favorite: {{tweet.favCount}}</span>
