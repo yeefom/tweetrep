@@ -7,13 +7,24 @@
   <div>
     Filter: <button ng-click="picOnly()">Image</button> <button ng-click="all()">All</button>
   </div>
-  <div ng-repeat="tweet in tweets.data | orderBy:sort">
-    <div>{{tweet.createdAtDisplay}}</div>
-    <div>{{tweet.text}}</div>
-    <img ng-src="{{tweet.media}}" ng-if="tweet.media">
-    <div>
-      <span>Retweet: {{tweet.retweetCount}}</span>
-      <span>Favorite: {{tweet.favCount}}</span>
+  <div ng-switch on="show.value">
+    <div ng-repeat="tweet in tweets.data | orderBy:sort" ng-switch-when="true">
+      <div>{{tweet.createdAtDisplay}}</div>
+      <div>{{tweet.text}}</div>
+      <img ng-src="{{tweet.media}}" ng-if="tweet.media">
+      <div>
+        <span>Retweet: {{tweet.retweetCount}}</span>
+        <span>Favorite: {{tweet.favCount}}</span>
+      </div>
+    </div>
+    <div ng-repeat="tweet in tweets.data | orderBy:sort" ng-switch-when="false" ng-if="tweet.media">
+      <div>{{tweet.createdAtDisplay}}</div>
+      <div>{{tweet.text}}</div>
+      <img ng-src="{{tweet.media}}" ng-if="tweet.media">
+      <div>
+        <span>Retweet: {{tweet.retweetCount}}</span>
+        <span>Favorite: {{tweet.favCount}}</span>
+      </div>
     </div>
   </div>
 </div>

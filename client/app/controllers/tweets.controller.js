@@ -27,14 +27,15 @@
         $scope.sort = '-retweetCount';
       };
 
-      $scope.show = 'tweet.media';
+      $scope.show = {};
+      $scope.show.value = true;
 
       $scope.picOnly = function () {
-        if ($scope.show === 'tweet.createdAt') {
-          $scope.show = 'tweet.media';
-        } else {
-          $scope.show = 'tweet.createdAt';
-        }
+        $scope.show.value = false;
+      };
+
+      $scope.all = function () {
+        $scope.show.value = true;
       };
     }
 })();
