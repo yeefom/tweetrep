@@ -20,10 +20,11 @@
         var tweet;
 
         for (var i = 0; i < tweets.data.length; i++) {
+          console.log(tweets.data[i]);
           tweet = {};
           tweet.text = tweets.data[i].text;
-          tweet.createdAt = Date.parse(tweets.data[i].created_at);
-          tweet.createdAtDisplay = tweet.createdAt.toString("h:mm tt MMM dd, yyyy");
+          tweet.createdAt = new Date(tweets.data[i].created_at.replace(/^\w+ (\w+) (\d+) ([\d:]+) \+0000 (\d+)$/,"$1 $2 $4 $3 UTC"));
+          tweet.createdAtDisplay = moment(tweet.createdAt).startOf('day').fromNow();
           tweet.retweetCount = tweets.data[i].retweet_count;
           tweet.favCount = tweets.data[i].favorite_count;
           tweet.media = tweets.data[i].media || null;

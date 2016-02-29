@@ -1,7 +1,13 @@
 <div>
   <input ng-model='name'></input>
   <button ng-click='getTweets(name)'>Get Tweets</button>
-  <div ng-repeat="tweet in tweets.data">
+  <div>
+    Sort by: <button ng-click='sortBy()'>Most Recent</button> <button ng-click='sortBy()'>Most Retweeted</button>
+  </div>
+  <div>
+    Filter by: <button>Image</button>
+  </div>
+  <div ng-repeat="tweet in tweets.data | orderBy:sort">
     <div>{{tweet.createdAtDisplay}}</div>
     <div>{{tweet.text}}</div>
     <div>

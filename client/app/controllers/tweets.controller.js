@@ -16,5 +16,15 @@
           $scope.tweets.data = dataService.parseData(tweets);
         });
       };
+
+      $scope.sort = '-createdAt';
+
+      $scope.sortBy = function () {
+        if ($scope.sort === '-createdAt') {
+          $scope.sort = '-retweetCount';
+        } else {
+          $scope.sort = '-createdAt';
+        }
+      };
     }
 })();
