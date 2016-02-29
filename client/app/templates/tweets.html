@@ -1,12 +1,12 @@
 <div>
   <input ng-model='name'></input>
   <button ng-click='getTweets(name)'>Get Tweets</button>
-  <div ng-repeat="tweet in tweets.data.data">
-    <div>{{tweet.created_at}}</div>
+  <div ng-repeat="tweet in tweets.data">
+    <div>{{tweet.createdAtDisplay}}</div>
     <div>{{tweet.text}}</div>
     <div>
-      <span>Retweet: {{tweet.retweet_count}}</span>
-      <span>Favorite: {{tweet.favorite_count}}</span>
+      <span>Retweet: {{tweet.retweetCount}}</span>
+      <span>Favorite: {{tweet.favCount}}</span>
     </div>
   </div>
 </div>

@@ -13,7 +13,7 @@
       $scope.getTweets = function (screenName) {
         dataService.getTweets(screenName)
         .then(function (tweets) {
-          $scope.tweets.data = tweets;
+          $scope.tweets.data = dataService.parseData(tweets);
         });
       };
     }
