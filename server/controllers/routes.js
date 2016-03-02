@@ -4,7 +4,8 @@ module.exports = function (app) {
   app.get('/api/timeline/:name', function(req, res){
     util.getTweets(req.params.name)
     .then(function (tweets) {
-      res.status(200).send(tweets);
+      var parsedTweets = util.parseTweets(tweets);
+      res.status(200).send(parsedTweets);
     })
     .catch(function (error) {
       console.error('ERR in utilities: ', error);
