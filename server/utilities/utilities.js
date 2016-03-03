@@ -1,6 +1,7 @@
 var client = require('../config/twitter-config.js');
 var Promise = require('bluebird');
 var moment = require('moment');
+var words = require('./words.js');
 
 var getTweets = function (screenName) {
   return new Promise(function (resolve, reject) {
@@ -31,6 +32,10 @@ var parseTweets = function (tweets) {
   }
 
   return parsed;
+};
+
+var computeScore = function () {
+
 };
 
 module.exports.getTweets = getTweets;
