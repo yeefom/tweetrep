@@ -4,7 +4,8 @@
   "description": "Twitter Reputation Analyzer",
   "main": "client/index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/mocha/bin/mocha tests/server.test.js",
+    "test-client": "./node_modules/karma/bin/karma start --single-run"
   },
   "repository": {
     "type": "git",
@@ -14,11 +15,23 @@
   "license": "ISC",
   "homepage": "https://bitbucket.org/yeefom/tweetrep#readme",
   "dependencies": {
+    "angular": "^1.5.0",
+    "angular-mocks": "^1.5.0",
+    "angular-route": "^1.5.0",
     "bluebird": "^3.3.3",
     "body-parser": "^1.15.0",
+    "chai": "^3.5.0",
     "express": "^4.13.4",
+    "karma": "^0.13.21",
+    "karma-chai": "^0.1.0",
+    "karma-mocha": "^0.2.2",
+    "karma-phantomjs-launcher": "^1.0.0",
+    "karma-spec-reporter": "0.0.24",
+    "mocha": "^2.4.5",
     "moment": "^2.11.2",
     "morgan": "^1.7.0",
+    "phantomjs-prebuilt": "^2.1.4",
+    "supertest": "^1.2.0",
     "twitter": "^1.2.5"
   }
 }
