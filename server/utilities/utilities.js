@@ -19,10 +19,13 @@ var getTweets = function (screenName) {
 var parseTweets = function (tweets) {
   var parsed = [];
   var tweet;
+  var text = '';
 
   for (var i = 0; i < tweets.length; i++) {
     tweet = {};
     tweet.text = tweets[i].text;
+    text += tweet.text;
+    text += ' ';
     tweet.createdAt = new Date(tweets[i].created_at.replace(/^\w+ (\w+) (\d+) ([\d:]+) \+0000 (\d+)$/,"$1 $2 $4 $3 UTC"));
     tweet.createdAtDisplay = moment(tweet.createdAt).format('MMM D, YYYY, h:mm:ss a');
     tweet.retweetCount = tweets[i].retweet_count;
@@ -30,12 +33,21 @@ var parseTweets = function (tweets) {
     tweet.media = tweets[i].entities.media !== undefined ? tweets[i].entities.media[0].media_url : null;
     parsed.push(tweet);
   }
-
-  return parsed;
+  var repScore = computeScore(text);
+  return {tweets: parsed, repScore: repScore};
 };
 
-var computeScore = function () {
-
+var computeScore = function (text) {
+  // remove urls, credit: http://stackoverflow.com/a/17773849/5133718
+  text = text.replace(/(https?:\/\/(?:www\.|(?!www))[^\s\.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,})/g, "");
+  // replace symblos (,.!?"') with space
+  text = text.replace(/[:,\.\!\?"']/g, " ");
+  // remove @username
+  text = text.replace(/@\w+(?=\s)/g, ''); 
+  // remove hashtag symbol
+  text = text.replace(/#/g, "");
+  var wordsArr = text.split(/\s+/);
+  console.log(wordsArr);
 };
 
 module.exports.getTweets = getTweets;
