@@ -10,6 +10,7 @@ var getTweets = function (screenName) {
       if (error) {
         reject(error);
       } else {
+        console.log(tweets);
         resolve(tweets);
       }
     });
@@ -20,7 +21,6 @@ var parseTweets = function (tweets) {
   var parsed = [];
   var tweet;
   var text = '';
-
   for (var i = 0; i < tweets.length; i++) {
     tweet = {};
     tweet.text = tweets[i].text;
@@ -46,8 +46,7 @@ var computeScore = function (text) {
   text = text.replace(/@\w+(?=\s)/g, ''); 
   // remove hashtag symbol
   text = text.replace(/#/g, "");
-  var wordsArr = text.split(/\s+/);
-  console.log(wordsArr);
+  wordsArr = text.split(/\s+/);
 };
 
 module.exports.getTweets = getTweets;
