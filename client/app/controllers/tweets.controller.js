@@ -10,11 +10,17 @@
     function tweetsCtrl($scope, dataService) {
       $scope.tweets = {};
 
+      $scope.profile = {};
+
+      $scope.profileShow = false;
+
       $scope.getTweets = function (screenName) {
         dataService.getTweets(screenName)
         .then(function (tweets) {
-          $scope.tweets.data = tweets.data;
+          $scope.tweets.data = tweets.data.tweets;
+          $scope.profile.data = tweets.data.profile;
         });
+        $scope.profileShow = true;
       };
 
       $scope.sort = '-createdAt';
