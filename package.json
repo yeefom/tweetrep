@@ -4,8 +4,9 @@
   "description": "Twitter Reputation Analyzer",
   "main": "client/index.html",
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha tests/server.test.js",
-    "test-client": "./node_modules/karma/bin/karma start --single-run"
+    "test": "npm run test-client && npm run test-server",
+    "test-client": "./node_modules/karma/bin/karma start --single-run",
+    "test-server": "./node_modules/mocha/bin/mocha tests/server.test.js"
   },
   "repository": {
     "type": "git",
