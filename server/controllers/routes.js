@@ -8,7 +8,7 @@ module.exports = function (app) {
       res.status(200).send(parsedTweets);
     })
     .catch(function (error) {
-      console.error('ERR in utilities: ', error);
+      console.error('ERR in routes: ', error);
       res.status(404).send('ERROR GETTING TWEETS');
     });
   });

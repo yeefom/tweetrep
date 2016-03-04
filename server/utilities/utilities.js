@@ -10,7 +10,6 @@ var getTweets = function (screenName) {
       if (error) {
         reject(error);
       } else {
-        console.log(tweets);
         resolve(tweets);
       }
     });
@@ -21,6 +20,7 @@ var parseTweets = function (tweets) {
   var parsed = [];
   var tweet;
   var text = '';
+  var retweets = 0;
   for (var i = 0; i < tweets.length; i++) {
     tweet = {};
     tweet.text = tweets[i].text;
@@ -29,15 +29,27 @@ var parseTweets = function (tweets) {
     tweet.createdAt = new Date(tweets[i].created_at.replace(/^\w+ (\w+) (\d+) ([\d:]+) \+0000 (\d+)$/,"$1 $2 $4 $3 UTC"));
     tweet.createdAtDisplay = moment(tweet.createdAt).format('MMM D, YYYY, h:mm:ss a');
     tweet.retweetCount = tweets[i].retweet_count;
+    // only count original tweets
+    if (tweet.text.slice(0, 4) !== 'RT @') {
+      console.log(tweet.text.slice(0, 4));
+      retweets += tweet.retweetCount;
+    }
     tweet.favCount = tweets[i].favorite_count;
     tweet.media = tweets[i].entities.media !== undefined ? tweets[i].entities.media[0].media_url : null;
     parsed.push(tweet);
   }
-  var repScore = computeScore(text);
-  return {tweets: parsed, repScore: repScore};
+  console.log(retweets);
+  var profile = {
+    screenName: tweets[0].user.screen_name,
+    name: tweets[0].user.name,
+    followers: tweets[0].user.followers_count,
+    following: tweets[0].user.friends_count,
+    repScore: computeScore(text, tweets[0].user.followers_count, retweets)
+  };
+  return {tweets: parsed, profile: profile};
 };
 
-var computeScore = function (text) {
+var computeScore = function (text, followers, retweets) {
   // remove urls, credit: http://stackoverflow.com/a/17773849/5133718
   text = text.replace(/(https?:\/\/(?:www\.|(?!www))[^\s\.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,})/g, "");
   // replace symblos (,.!?"') with space
@@ -47,6 +59,18 @@ var computeScore = function (text) {
   // remove hashtag symbol
   text = text.replace(/#/g, "");
   wordsArr = text.split(/\s+/);
+  var contentScore = 0;
+  for (var i = 0; i < wordsArr; i++) {
+    if (words.positiveWords[wordsArr[i]]) {
+      contentScore++;
+    }
+    if (words.negativeWords[wordsArr[i]]) {
+      contentScore--;
+    }
+  }
+  // Please refer to README for more details about the score
+  var repScore = Math.ceil(Math.min(1, followers/100000) * 43 + Math.min(1, retweets/1000) * 43 + contentScore);
+  return Math.min(100, repScore);
 };
 
 module.exports.getTweets = getTweets;
