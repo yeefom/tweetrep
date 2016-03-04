@@ -64,7 +64,7 @@ input {
 
 .tweet {
   border-top: 1px solid #E0E0DB;
-  padding: 5px;
+  padding: 12px 10px;
 }
 
 .meta {
@@ -82,4 +82,8 @@ img {
 
 .nav {
   padding-top: 5px;
+}
+
+.text {
+  padding: 10px 0;
 }

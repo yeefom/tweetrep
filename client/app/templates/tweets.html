@@ -1,7 +1,7 @@
 <div class="container">
   <div class="nav">
     <div>
-      <input ng-model="name"></input>
+      <input ng-model="name" ng-keypress="$event.which === 13 && getTweets(name)"></input>
       <button ng-click="getTweets(name)">Get Tweets</button>
     </div>
     <div>
@@ -26,21 +26,23 @@
   </div>
   <div ng-switch on="show.value">
     <div ng-repeat="tweet in tweets.data | orderBy:sort" ng-switch-when="true" class="tweet">
-      <div class='meta'>{{tweet.createdAtDisplay}}</div>
-      <div>{{tweet.text}}</div>
+      <div class="meta">{{tweet.createdAtDisplay}}</div>
+      <div class="text">{{tweet.text}}</div>
       <div class="image">
         <a href="{{tweet.media}}"><img ng-src="{{tweet.media}}" ng-if="tweet.media"></a>
       </div>
-      <div class='meta'>
+      <div class="meta">
         <span>Retweet: {{tweet.retweetCount}}</span>
         <span>Favorite: {{tweet.favCount}}</span>
       </div>
     </div>
-    <div ng-repeat="tweet in tweets.data | orderBy:sort" ng-switch-when="false" ng-if="tweet.media">
-      <div>{{tweet.createdAtDisplay}}</div>
-      <div>{{tweet.text}}</div>
-      <img ng-src="{{tweet.media}}" ng-if="tweet.media">
-      <div>
+    <div ng-repeat="tweet in tweets.data | orderBy:sort" ng-switch-when="false" class="tweet" ng-if="tweet.media">
+      <div class="meta">{{tweet.createdAtDisplay}}</div>
+      <div class="text">{{tweet.text}}</div>
+      <div class="image">
+        <a href="{{tweet.media}}"><img ng-src="{{tweet.media}}" ng-if="tweet.media"></a>
+      </div>
+      <div class="meta">
         <span>Retweet: {{tweet.retweetCount}}</span>
         <span>Favorite: {{tweet.favCount}}</span>
       </div>
