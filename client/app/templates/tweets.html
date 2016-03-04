@@ -1,29 +1,37 @@
-<div>
-  <input ng-model="name"></input>
-  <button ng-click="getTweets(name)">Get Tweets</button>
-  <div>
-    Sort by: <button ng-click="sortByDate()">Most Recent</button> <button ng-click="sortByRetweet()">Most Retweeted</button>
-  </div>
-  <div>
-    Filter: <button ng-click="picOnly()">Image</button> <button ng-click="all()">All</button>
-  </div>
-  <div ng-if = "profileShow">
+<div class="container">
+  <div class="nav">
     <div>
-      <span>{{profile.data.name}}</span>
-      <span><a ng-href="https://twitter.com/yeefom{{profile.data.screenName}}">@{{profile.data.screenName}}</a></span>
+      <input ng-model="name"></input>
+      <button ng-click="getTweets(name)">Get Tweets</button>
+    </div>
+    <div>
+      Sort by: <button ng-click="sortByDate()">Recent</button><button ng-click="sortByRetweet()">Retweets</button>
+    </div>
+    <div>
+      Filter: <button ng-click="picOnly()">Image</button><button ng-click="all()">All</button>
+    </div>
+  </div>
+  <div ng-if="profileShow" class="profile">
+    <div>
+      <span class="name">{{profile.data.name}}</span>
+      <span class="screen-name"><a ng-href="https://twitter.com/yeefom{{profile.data.screenName}}">@{{profile.data.screenName}}</a></span>
     </div>
     <div>
       Following: <span>{{profile.data.following}}</span>
       Followers: <span>{{profile.data.followers}}</span>
+    </div>
+    <div>
       Reputation: <span>{{profile.data.repScore}}</span>
     </div>
   </div>
   <div ng-switch on="show.value">
-    <div ng-repeat="tweet in tweets.data | orderBy:sort" ng-switch-when="true">
-      <div>{{tweet.createdAtDisplay}}</div>
+    <div ng-repeat="tweet in tweets.data | orderBy:sort" ng-switch-when="true" class="tweet">
+      <div class='meta'>{{tweet.createdAtDisplay}}</div>
       <div>{{tweet.text}}</div>
-      <img ng-src="{{tweet.media}}" ng-if="tweet.media">
-      <div>
+      <div class="image">
+        <a href="{{tweet.media}}"><img ng-src="{{tweet.media}}" ng-if="tweet.media"></a>
+      </div>
+      <div class='meta'>
         <span>Retweet: {{tweet.retweetCount}}</span>
         <span>Favorite: {{tweet.favCount}}</span>
       </div>
