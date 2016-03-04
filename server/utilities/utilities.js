@@ -31,14 +31,12 @@ var parseTweets = function (tweets) {
     tweet.retweetCount = tweets[i].retweet_count;
     // only count original tweets
     if (tweet.text.slice(0, 4) !== 'RT @') {
-      console.log(tweet.text.slice(0, 4));
       retweets += tweet.retweetCount;
     }
     tweet.favCount = tweets[i].favorite_count;
     tweet.media = tweets[i].entities.media !== undefined ? tweets[i].entities.media[0].media_url : null;
     parsed.push(tweet);
   }
-  console.log(retweets);
   var profile = {
     screenName: tweets[0].user.screen_name,
     name: tweets[0].user.name,
