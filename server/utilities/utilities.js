@@ -53,7 +53,7 @@ var computeScore = function (text, followers, retweets) {
   // replace symblos (,.!?"') with space
   text = text.replace(/[:,\.\!\?"']/g, " ");
   // remove @username
-  text = text.replace(/@\w+(?=\s)/g, ''); 
+  text = text.replace(/@\w+(?=\s)/g, '');
   // remove hashtag symbol
   text = text.replace(/#/g, "");
   wordsArr = text.split(/\s+/);
@@ -67,16 +67,14 @@ var computeScore = function (text, followers, retweets) {
     }
   }
   // Please refer to README for more details about the score
-  var repScore;
-  if (followers <= 100) {
-    repScore = Math.ceil(Math.min(1, followers/100000) * 43 + Math.min(1, retweets/100) * 43 + contentScore);
-  } else if (followers <= 1000) {
-    repScore = Math.ceil(Math.min(1, followers/100000) * 43 + Math.min(1, retweets/1000) * 43 + contentScore);
-  } else if (followers <= 10000) {
-    repScore = Math.ceil(Math.min(1, followers/100000) * 43 + Math.min(1, retweets/10000) * 43 + contentScore);
-  } else {
-    repScore = Math.ceil(Math.min(1, followers/100000) * 43 + Math.min(1, retweets/100000) * 43 + contentScore);
-  }
+  /**
+   *    0 ~   100 =   100
+   *  101 ~  1000 =  1000
+   * 1001 ~ 10000 = 10000
+   * etc.
+   */
+  Math.pow(10, (followers-1).toString().length);
+  var repScore = Math.ceil(Math.min(1, followers/100000) * 43 + Math.min(1, retweets/base) * 43 + contentScore);
   return Math.min(100, repScore);
 };
 
