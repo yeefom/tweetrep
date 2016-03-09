@@ -73,7 +73,7 @@ var computeScore = function (text, followers, retweets) {
    * 1001 ~ 10000 = 10000
    * etc.
    */
-  Math.pow(10, (followers-1).toString().length);
+  var base = Math.max(1000000, Math.pow(10, (followers-1).toString().length));
   var repScore = Math.ceil(Math.min(1, followers/100000) * 43 + Math.min(1, retweets/base) * 43 + contentScore);
   return Math.min(100, repScore);
 };
