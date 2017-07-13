@@ -13,8 +13,6 @@ Tweetrep is just another fun tool to calculate a Twitter user's "reputation scor
 
 ### Usage
 
-The deployed app can be accessed [here](http://tweetrep.herokuapp.com).
-
 To run Tweetrep locally, please first install dependencies by running `npm install`, and then simply use `npm start` to start the server. The local address is [localhost:8080](localhost:8080).
 
 ### Testing
